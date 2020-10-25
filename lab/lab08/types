@@ -1,0 +1,431 @@
+Sys(3o)                          OCaml library                         Sys(3o)
+
+
+
+NNAAMMEE
+       Sys - System interface.
+
+MMoodduullee
+       Module   Sys
+
+DDooccuummeennttaattiioonn
+       Module SSyyss
+        : ssiigg eenndd
+
+
+       System interface.
+
+
+
+
+
+
+
+       _v_a_l _a_r_g_v : ssttrriinngg aarrrraayy
+
+       The  command line arguments given to the process.  The first element is
+       the command name used to invoke the program.   The  following  elements
+       are the command-line arguments given to the program.
+
+
+
+
+       _v_a_l _e_x_e_c_u_t_a_b_l_e___n_a_m_e : ssttrriinngg
+
+       The name of the file containing the executable currently running.
+
+
+
+
+       _v_a_l _f_i_l_e___e_x_i_s_t_s : ssttrriinngg -->> bbooooll
+
+       Test if a file with the given name exists.
+
+
+
+
+       _v_a_l _i_s___d_i_r_e_c_t_o_r_y : ssttrriinngg -->> bbooooll
+
+       Returns  ttrruuee  if  the  given  name  refers to a directory, ffaallssee if it
+       refers to another kind of file.  Raise SSyyss__eerrrroorr if no file exists with
+       the given name.
+
+       SSiinnccee 3.10.0
+
+
+
+
+       _v_a_l _r_e_m_o_v_e : ssttrriinngg -->> uunniitt
+
+       Remove the given file name from the file system.
+
+
+
+
+       _v_a_l _r_e_n_a_m_e : ssttrriinngg -->> ssttrriinngg -->> uunniitt
+
+       Rename a file. The first argument is the old name and the second is the
+       new name. If there is already another file under the new  name,  rreennaammee
+       may replace it, or raise an exception, depending on your operating sys‐
+       tem.
+
+
+
+
+       _v_a_l _g_e_t_e_n_v : ssttrriinngg -->> ssttrriinngg
+
+       Return the value associated to a variable in the  process  environment.
+       Raise NNoott__ffoouunndd if the variable is unbound.
+
+
+
+
+       _v_a_l _c_o_m_m_a_n_d : ssttrriinngg -->> iinntt
+
+       Execute the given shell command and return its exit code.
+
+
+
+
+       _v_a_l _t_i_m_e : uunniitt -->> ffllooaatt
+
+       Return  the  processor  time, in seconds, used by the program since the
+       beginning of execution.
+
+
+
+
+       _v_a_l _c_h_d_i_r : ssttrriinngg -->> uunniitt
+
+       Change the current working directory of the process.
+
+
+
+
+       _v_a_l _g_e_t_c_w_d : uunniitt -->> ssttrriinngg
+
+       Return the current working directory of the process.
+
+
+
+
+       _v_a_l _r_e_a_d_d_i_r : ssttrriinngg -->> ssttrriinngg aarrrraayy
+
+       Return the names of all files present in the  given  directory.   Names
+       denoting the current directory and the parent directory ( ..  and ....  in
+       Unix) are not returned.  Each string in  the  result  is  a  file  name
+       rather  than  a  complete  path.   There  is no guarantee that the name
+       strings in the resulting array will appear in any specific order;  they
+       are not, in particular, guaranteed to appear in alphabetical order.
+
+
+
+
+       _v_a_l _i_n_t_e_r_a_c_t_i_v_e : bbooooll PPeerrvvaassiivveess..rreeff
+
+       This  reference is initially set to ffaallssee in standalone programs and to
+       ttrruuee if the code is being executed under the interactive toplevel  sys‐
+       tem ooccaammll .
+
+
+
+
+       _v_a_l _o_s___t_y_p_e : ssttrriinngg
+
+       Operating system currently executing the OCaml program. One of
+
+       - UUnniixx (for all Unix versions, including Linux and Mac OS X),
+
+       - WWiinn3322 (for MS-Windows, OCaml compiled with MSVC++ or Mingw),
+
+       - CCyyggwwiinn (for MS-Windows, OCaml compiled with Cygwin).
+
+
+
+
+
+       _v_a_l _u_n_i_x : bbooooll
+
+       True if SSyyss..ooss__ttyyppee == UUnniixx .
+
+       SSiinnccee 4.01.0
+
+
+
+
+       _v_a_l _w_i_n_3_2 : bbooooll
+
+       True if SSyyss..ooss__ttyyppee == WWiinn3322 .
+
+       SSiinnccee 4.01.0
+
+
+
+
+       _v_a_l _c_y_g_w_i_n : bbooooll
+
+       True if SSyyss..ooss__ttyyppee == CCyyggwwiinn .
+
+       SSiinnccee 4.01.0
+
+
+
+
+       _v_a_l _w_o_r_d___s_i_z_e : iinntt
+
+       Size  of one word on the machine currently executing the OCaml program,
+       in bits: 32 or 64.
+
+
+
+
+       _v_a_l _b_i_g___e_n_d_i_a_n : bbooooll
+
+       Whether the machine currently executing the Caml program is big-endian.
+
+       SSiinnccee 4.00.0
+
+
+
+
+       _v_a_l _m_a_x___s_t_r_i_n_g___l_e_n_g_t_h : iinntt
+
+       Maximum length of a string.
+
+
+
+
+       _v_a_l _m_a_x___a_r_r_a_y___l_e_n_g_t_h : iinntt
+
+       Maximum length of a normal array.  The maximum length of a float  array
+       is mmaaxx__aarrrraayy__lleennggtthh//22 on 32-bit machines and mmaaxx__aarrrraayy__lleennggtthh on 64-bit
+       machines.
+
+
+
+
+
+       ====== SSiiggnnaall hhaannddlliinngg ======
+
+
+       _t_y_p_e _s_i_g_n_a_l___b_e_h_a_v_i_o_r =
+        | Signal_default
+        | Signal_ignore
+        | Signal_handle ooff ((iinntt -->> uunniitt))
+
+
+       What to do when receiving a signal:
+
+       - SSiiggnnaall__ddeeffaauulltt : take the default behavior (usually: abort  the  pro‐
+       gram)
+
+       - SSiiggnnaall__iiggnnoorree : ignore the signal
+
+       -  SSiiggnnaall__hhaannddllee  ff  : call function ff , giving it the signal number as
+       argument.
+
+
+
+
+
+       _v_a_l _s_i_g_n_a_l : iinntt -->> ssiiggnnaall__bbeehhaavviioorr -->> ssiiggnnaall__bbeehhaavviioorr
+
+       Set the behavior of the system on receipt of a given signal.  The first
+       argument  is the signal number.  Return the behavior previously associ‐
+       ated with the signal. If the signal number is invalid (or not available
+       on your system), an IInnvvaalliidd__aarrgguummeenntt exception is raised.
+
+
+
+
+       _v_a_l _s_e_t___s_i_g_n_a_l : iinntt -->> ssiiggnnaall__bbeehhaavviioorr -->> uunniitt
+
+       Same as SSyyss..ssiiggnnaall but return value is ignored.
+
+
+
+
+
+       ====== SSiiggnnaall nnuummbbeerrss ffoorr tthhee ssttaannddaarrdd PPOOSSIIXX ssiiggnnaallss..  ======
+
+
+       _v_a_l _s_i_g_a_b_r_t : iinntt
+
+       Abnormal termination
+
+
+
+
+       _v_a_l _s_i_g_a_l_r_m : iinntt
+
+       Timeout
+
+
+
+
+       _v_a_l _s_i_g_f_p_e : iinntt
+
+       Arithmetic exception
+
+
+
+
+       _v_a_l _s_i_g_h_u_p : iinntt
+
+       Hangup on controlling terminal
+
+
+
+
+       _v_a_l _s_i_g_i_l_l : iinntt
+
+       Invalid hardware instruction
+
+
+
+
+       _v_a_l _s_i_g_i_n_t : iinntt
+
+       Interactive interrupt (ctrl-C)
+
+
+
+
+       _v_a_l _s_i_g_k_i_l_l : iinntt
+
+       Termination (cannot be ignored)
+
+
+
+
+       _v_a_l _s_i_g_p_i_p_e : iinntt
+
+       Broken pipe
+
+
+
+
+       _v_a_l _s_i_g_q_u_i_t : iinntt
+
+       Interactive termination
+
+
+
+
+       _v_a_l _s_i_g_s_e_g_v : iinntt
+
+       Invalid memory reference
+
+
+
+
+       _v_a_l _s_i_g_t_e_r_m : iinntt
+
+       Termination
+
+
+
+
+       _v_a_l _s_i_g_u_s_r_1 : iinntt
+
+       Application-defined signal 1
+
+
+
+
+       _v_a_l _s_i_g_u_s_r_2 : iinntt
+
+       Application-defined signal 2
+
+
+
+
+       _v_a_l _s_i_g_c_h_l_d : iinntt
+
+       Child process terminated
+
+
+
+
+       _v_a_l _s_i_g_c_o_n_t : iinntt
+
+       Continue
+
+
+
+
+       _v_a_l _s_i_g_s_t_o_p : iinntt
+
+       Stop
+
+
+
+
+       _v_a_l _s_i_g_t_s_t_p : iinntt
+
+       Interactive stop
+
+
+
+
+       _v_a_l _s_i_g_t_t_i_n : iinntt
+
+       Terminal read from background process
+
+
+
+
+       _v_a_l _s_i_g_t_t_o_u : iinntt
+
+       Terminal write from background process
+
+
+
+
+       _v_a_l _s_i_g_v_t_a_l_r_m : iinntt
+
+       Timeout in virtual time
+
+
+
+
+       _v_a_l _s_i_g_p_r_o_f : iinntt
+
+       Profiling interrupt
+
+
+
+
+       _e_x_c_e_p_t_i_o_n _B_r_e_a_k
+
+
+       Exception raised on interactive interrupt if SSyyss..ccaattcchh__bbrreeaakk is on.
+
+
+
+
+       _v_a_l _c_a_t_c_h___b_r_e_a_k : bbooooll -->> uunniitt
+
+
+       ccaattcchh__bbrreeaakk  governs  whether interactive interrupt (ctrl-C) terminates
+       the program or raises the BBrreeaakk exception.  Call  ccaattcchh__bbrreeaakk  ttrruuee  to
+       enable  raising  BBrreeaakk , and ccaattcchh__bbrreeaakk ffaallssee to let the system termi‐
+       nate the program on user interrupt.
+
+
+
+
+       _v_a_l _o_c_a_m_l___v_e_r_s_i_o_n : ssttrriinngg
+
+
+       ooccaammll__vveerrssiioonn is the version of OCaml.  It is  a  string  of  the  form
+       mmaajjoorr..mmiinnoorr[[..ppaattcchhlleevveell]][[++aaddddiittiioonnaall--iinnffoo]]  , where mmaajjoorr , mmiinnoorr , and
+       ppaattcchhlleevveell are integers, and aaddddiittiioonnaall--iinnffoo is  an  arbitrary  string.
+       The [[..ppaattcchhlleevveell]] and [[++aaddddiittiioonnaall--iinnffoo]] parts may be absent.
+
+
+
+
+
+
+OCamldoc                          2014-10-30                           Sys(3o)
